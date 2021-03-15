@@ -24,17 +24,19 @@ class App extends Component {
     this.setState({
       bookmarks: [...this.state.bookmarks, bookmark],
     })
-
   }
 
   deleteBookmark = bookmarkId => {
+      console.log('at delete'); // dbg..
     const newBookmarks = this.state.bookmarks.filter(bm =>
       bm.id !== bookmarkId
     )
+
     this.setState({
       bookmarks: newBookmarks
     })
   }
+
 
   componentDidMount() {
     fetch(config.API_ENDPOINT, {
@@ -54,9 +56,17 @@ class App extends Component {
       .then(res => {
         this.setBookmarks(res)
       })
-
       .catch(error => this.setState({ error }))
   }
+
+  updateBookmark = updatedBookmark => {
+    this.setState({
+      bookmarks: this.state.bookmarks.map(bm =>
+        (bm.id !== updatedBookmark.id) ? bm : updatedBookmark
+      )
+    })
+  }
+
 
   render() {
     const contextValue = {
@@ -64,6 +74,7 @@ class App extends Component {
       addBookmark: this.addBookmark,
       deleteBookmark: this.deleteBookmark,
     }
+    console.log(`this.state.bookmarks :>> `, this.state.bookmarks); // dbg..
 
     return (
       <main className='App'>
@@ -77,6 +88,15 @@ class App extends Component {
               component={AddBookmark}
             // onClickCancel={() => {/* what here? */ }}
             />
+
+            {/* for /update-bookmark */}
+
+            {/* 
+            <Route
+              path='/update-bookmark'
+              component={AddBookmark}
+            />
+ */}
 
             {/* for / */}
             <Route

@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 class BookmarkList extends Component {
   static contextType = BookmarksContext;
 
-
   static defaultProps = {
     bookmarks: []
   };
