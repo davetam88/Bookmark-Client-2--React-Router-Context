@@ -1,11 +1,13 @@
 import React from 'react';
 import Rating from '../Rating/Rating';
 import config from '../config';
+import { Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import BookmarksContext from '../BookmarksContext';
 import './BookmarkItem.css';
 
+
 function deleteBookmarkRequest(bookmarkId, callback) {
-  console.log('in deleteBookmarkRequest'); // dbg..
 
   fetch(config.API_ENDPOINT + `/${bookmarkId}`, {
     method: 'DELETE',
@@ -14,7 +16,6 @@ function deleteBookmarkRequest(bookmarkId, callback) {
     }
   })
     .then(res => {
-      console.log('res :>> ', res); // dbg..
       if (!res.ok)
       {
         // get the error message from the response,
@@ -24,15 +25,7 @@ function deleteBookmarkRequest(bookmarkId, callback) {
         })
       }
       let tempx = res.json;
-      console.log('res.json is tempx :>> ', tempx); // dbg..
-      return res.json()
-      // url: "http://localhost:8000/api/bookmarks/82"
-    })
-    .then(data => {
-      console.log('bookmarkId :>> ', bookmarkId); // dbg..
-      console.log('delete bm request data :>> ', data); // dbg..
-      console.log('before callback'); // dbg..
-      //      callback(bookmarkId)
+      callback(bookmarkId)
     })
     .catch(error => {
       console.error(error)
@@ -41,7 +34,6 @@ function deleteBookmarkRequest(bookmarkId, callback) {
 
 
 export default function BookmarkItem(props) {
-  console.log(`in bmkitem props :>> `, props); // dbg..
   return (
     <BookmarksContext.Consumer>
       {(context) => (

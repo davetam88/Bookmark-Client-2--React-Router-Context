@@ -27,7 +27,6 @@ class App extends Component {
   }
 
   deleteBookmark = bookmarkId => {
-      console.log('at delete'); // dbg..
     const newBookmarks = this.state.bookmarks.filter(bm =>
       bm.id !== bookmarkId
     )
@@ -74,7 +73,6 @@ class App extends Component {
       addBookmark: this.addBookmark,
       deleteBookmark: this.deleteBookmark,
     }
-    console.log(`this.state.bookmarks :>> `, this.state.bookmarks); // dbg..
 
     return (
       <main className='App'>
