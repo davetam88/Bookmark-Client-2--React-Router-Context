@@ -53,7 +53,17 @@ export default function BookmarkItem(props) {
           <p className='BookmarkItem__description'>
             {props.description}
           </p>
+
+
           <div className='BookmarkItem__buttons'>
+
+            <button>
+              <Link to={`/edit/${props.id}`}>
+                Update
+            </Link>
+            </button>
+
+
             <button
               className='BookmarkItem__description'
               // onClick={() => props.onClickDelete(props.id)}
@@ -67,9 +77,10 @@ export default function BookmarkItem(props) {
               Delete
         </button>
           </div>
-        </li>
-      )}
-    </BookmarksContext.Consumer>
+        </li >
+      )
+      }
+    </BookmarksContext.Consumer >
   )
 }
 
